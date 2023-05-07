@@ -1,0 +1,8 @@
+{% include "layout.html" %}
+
+{% block body %}
+    <h1>GP2 Report</h1>
+  <object data="{{ url_for('static', filename='pdf/Ali_Osman_Beker_Sumeyra_Polat.pdf') }}" type="application/pdf" width="100%" height="600">
+    <p>Sorry, your browser doesn't support embedded PDFs. You can <a href="{{ url_for('static', filename='pdf/myfile.pdf') }}">download the PDF file</a> instead.</p>
+  </object>
+{% endblock %}

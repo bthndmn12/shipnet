@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+    <style>
+    body {
+        color: #fff; /* sets the default color of the text */
+    }
+
+    /* Add more specific CSS rules to target specific elements */
+    h1, h2, h3, h4, h5, h6 {
+        color: #fff; /* sets the color of the headings */
+    }
+
+    p, ul, ol, li {
+        color: #dcdcdc; /* sets the color of the paragraphs and lists */
+    }
+
+
+        .hero {
+  height: 50vh;
+
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  text-align: center;
+  color: #fff;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.hero-content p {
+  font-size: 1.2em;
+  margin-bottom: 1.5em;
+}
+
+.cta {
+  display: inline-block;
+  background-color: #fff;
+  color: #333;
+  padding: 0.8em 1.5em;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta:hover {
+  background-color: #333;
+  color: #fff;
+}
+</style>
+<div class="row">
+  <div class="col-md-3">
+    <img src="{{ url_for('static', filename='model.png') }}" alt="image" class="img-thumbnail">
+  </div>
+  <div class="col-md-9">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Deep Learning Based Ship Detection from Multi-Modal Satellite photos</h1>
+      <p>A project to develop a deep learning-based system for autonomously identifying ships in satellite photos.</p>
+      <a href="#project-details" class="cta">Learn More</a>
+    </div>
+  </section>
+
+  <section id="project-details">
+
+    <h2>Introduction</h2>
+    <p>The project Deep Learning Based Ship Detection from Multi-Modal Satellite photos intends
+to develop a deep learning-based system for autonomously identifying ships in satellite
+photos. A sizable collection of multi-modal satellite images, including images from several
+sensors and wavelengths, will be used to train the system. The system will be able to identify
+ships in a variety of circumstances and situations by utilizing deep learning algorithms, which
+will be an improvement over current ship detection techniques. The system will be judged
+based on how well it can precisely and consistently spot ships in satellite photos, and its
+potential uses will be investigated.</p>
+
+  </section>
+    <section>
+    <h2>The Model</h2>
+        <p>Our model consists of several convolutional layers followed by fully
+            connected layers. The convolutional layers are responsible for extracting
+            features from the input image, while the fully connected layers perform the
+            actual classification.
+            The model is defined using PyTorch's nn.Module class.</p>
+  </section>
+    <section>
+
+        <h2>Comparison of PyTorch and TensorFlow Models</h2>
+
+    <h4>PyTorch Model:</h4>
+    <ul>
+        <li>Uses Batch Normalization layers.</li>
+        <li>Achieves a test accuracy of 99.25% after early stopping at 37 epochs.</li>
+        <li>Final validation loss is 0.3358.</li>
+    </ul>
+<img src="../static/pytorch.png" alt="PyTorch Model Image" width="600" />
+        <h4>TensorFlow Model:</h4>
+    <ul>
+        <li>Does not use Batch Normalization layers.</li>
+        <li>Achieves a test accuracy of 99.12% after early stopping at 25 epochs.</li>
+        <li>Final validation loss is 0.1273.</li>
+    </ul></section>
+<img src="../static/tensorflow.png" alt="TensorFlow Model Image" width="300" />
+
+        <section>
+    <h2>What Is Next</h2>
+        <p>We are going to use two segmentation model for categorization of shi. Firstly DINOv2 and
+the other SAM(Segment of Anything) but we are working on it.</p>
+  </section>
+{% endblock %}
