@@ -6,7 +6,7 @@ import time
 import io
 import cv2
 import numpy as np
-from flask import Flask, request, jsonify, Response,render_template
+from flask import Flask, request, jsonify, Response, render_template
 from PIL import Image, ImageOps
 import matplotlib.pyplot as plt
 import torch
@@ -15,6 +15,8 @@ import torch.nn.functional as F
 from torchvision import transforms
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+
 
 class Net2(nn.Module):
     def __init__(self):
@@ -119,9 +121,9 @@ class Net(nn.Module):
 
 
 model = None
-#model_path = "model3.pth"
+# model_path = "model3.pth"
 
-model2= None
+model2 = None
 model2_path = "model4.pth"
 
 if os.path.exists(model2_path):
@@ -141,7 +143,6 @@ else:
 
 @app.route("/", methods=["GET", "POST"])
 def predict():
-
     if request.method == "GET":
         return render_template("index.html")
 
@@ -166,12 +167,11 @@ def predict():
         heatmap_img.save(buffer_heatmap, format='JPEG')
         heatmap_base64 = base64.b64encode(buffer_heatmap.getvalue()).decode()
 
-        return render_template("index.html", prediction=heatmap_base64, image=image_base64, elapsed_time=int(elapsed_time))
-
+        return render_template("index.html", prediction=heatmap_base64, image=image_base64,
+                               elapsed_time=int(elapsed_time))
 
 
 def scanmap(image_np, model):
-
     image_np = image_np.astype(np.float32) / 255.0
 
     window_size = (80, 80)
@@ -197,24 +197,31 @@ def scanmap(image_np, model):
     probabilities_map = np.array(probabilities_map)
     return probabilities_map
 
+
 @app.route("/", methods=["GET"])
 def home():
     return render_template("index.html")
+
 
 @app.route('/about')
 def about():
     return render_template("aboutus.html")
 
+
 @app.route('/article')
 def article():
     return render_template("article.html")
+
 
 @app.route('/gp2report')
 def gpreport():
     return render_template("gp2report.html")
 
+@app.route('/notebook')
+def notebokk():
+    return render_template("shipnetgp3.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8001)))
-    #app.run(debug=True, port=8001)
-
+    # app.run(debug=True, port=8001)
